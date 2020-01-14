@@ -8,6 +8,10 @@ import Congrats from './Congrats';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
+const defaultProps = {
+	success: false,
+};
+
 /**
  * Factory function to create a ShallowWrapper for the Congrats component.
  * @function setup
@@ -15,18 +19,20 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
  * @returns {ShallowWrapper}
  */
 const setup = (props = {}) => {
-	return shallow(<Congrats { ...props }/>)
+	const setupProps = {...defaultProps, ...props};
+
+	return shallow(<Congrats { ...setupProps }/>);
 };
 
 test('renders without error', () => {
-	const wrapper = setup({ success: false });
+	const wrapper = setup();
 	const congrats = findByTestAttr(wrapper, 'component-congrats');
 
 	expect(congrats.length).toBe(1);
 });
 
 test('renders no text when "success" prop is false', () => {
-	const wrapper = setup({ success: false });
+	const wrapper = setup();
 	const congrats = findByTestAttr(wrapper, 'component-congrats');
 
 	expect(congrats.text()).toBe('');
