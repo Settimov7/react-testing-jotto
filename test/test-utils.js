@@ -1,5 +1,8 @@
 import checkPropTypes from 'check-prop-types';
 
+import rootReducer from '../src/reducers';
+import { createStore } from 'redux';
+
 /**
  * Return node(s) with the given data-test value.
  * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper.
@@ -12,4 +15,15 @@ export const checkProps = (component, confirmingProps) => {
 	const propError = checkPropTypes(component.propTypes, confirmingProps, 'prop', component.name);
 
 	expect(propError).toBeUndefined();
+};
+
+/**
+ * Create a testing store with imported reducers, middleware and initial state.
+ * globals: rootReducer
+ * @function storeFactory
+ * @param {object} initialState - Initial state for store.
+ * @returns {Store} - Redux store.
+ */
+export const storeFactory = (initialState) => {
+	return createStore(rootReducer, initialState);
 };
