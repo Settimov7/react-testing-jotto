@@ -6,7 +6,15 @@ import Congrats from './Congrats';
 import Input from './Input';
 import { getSecretWord } from './actions';
 
-class App extends Component {
+export class UnconnectedApp extends Component {
+	/**
+	 * @method componentDidMount
+	 * @returns {undefined}
+	 */
+	componentDidMount() {
+		this.props.getSecretWord();
+	}
+
 	render() {
 		const { success, guessedWords } = this.props;
 
@@ -34,4 +42,4 @@ const mapDispatchToProps = {
 	getSecretWord,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedApp);
