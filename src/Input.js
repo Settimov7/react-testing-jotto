@@ -12,12 +12,12 @@ export class UnconnectedInput extends Component {
 		super(props);
 
 		this.state = {
-			currentGuess: null,
+			currentGuess: '',
 		};
 	}
 
 	handleChangeButtonSubmit = (event) => {
-		this.setState({ currentGuess: event.target.value })
+		this.setState({ currentGuess: event.target.value });
 	};
 
 	handleClickButtonSubmit = (event) => {
@@ -25,7 +25,11 @@ export class UnconnectedInput extends Component {
 
 		const { currentGuess } = this.state;
 
-		currentGuess && this.props.guessWord(this.state.currentGuess);
+		if (currentGuess) {
+			this.props.guessWord(this.state.currentGuess);
+
+			this.setState({ currentGuess: '' });
+		}
 	};
 
 	render() {

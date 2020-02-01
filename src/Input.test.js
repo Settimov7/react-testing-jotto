@@ -123,4 +123,8 @@ describe('"guessWord" action creator call', () => {
 
 		expect(guessWordMockArgument).toBe(guessedWord);
 	});
+
+	test('input box clears on submit', () => {
+		expect(wrapper.state('currentGuess')).toBe('');
+	});
 });
